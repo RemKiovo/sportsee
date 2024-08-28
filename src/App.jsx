@@ -1,35 +1,51 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
+import getUser from './services/user.service'
+import getActivity from './services/activity.service'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+	const [user, setUser] = useState(null)
+	const [userActivity, setUserActivity] = useState(null)
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+	useEffect(() => {
+		const fetchUserData = async () => {
+			const user = await getUser(12)
+			const userActivity = await getActivity(12)
+
+			setUser(user.data)
+			setUserActivity(userActivity.data)
+		}
+
+		fetchUserData()
+	}, [])
+
+	if (!user) return <h1>Loading...</h1>
+
+	return (
+		<main>
+			<h1>Hello, World!</h1>
+			<h2>API</h2>
+			<h3 className='font-bold text-xl'>Get User</h3>
+			<section className='flex gap-4'>
+				<p>{user.id}</p>
+				<p>{user.userInfos.firstName}</p>
+				<p>{user.userInfos.lastName}</p>
+				<p>{user.userInfos.age}</p>
+			</section>
+
+			<h3 className='font-bold text-xl'>Get Activity</h3>
+			<section className='text-red-500 flex gap-4 w-full'>
+				{userActivity.sessions.map((session, index) => (
+					<div key={index} className='flex-1'>
+						<p>Day: {session.day}</p>
+						<p>SessionLength: {session.sessionLength}</p>
+						<p>KG: {session.kilogram}</p>
+						<p>Calories: {session.calories}</p>
+					</div>
+				))}
+			</section>
+		</main>
+	)
 }
 
 export default App
