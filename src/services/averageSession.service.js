@@ -1,10 +1,11 @@
-import axios from 'axios'
+import mockData from '../data/mockData'
 
 const getAverageSession = async (userId) => {
-	const response = await axios.get(
-		`http://localhost:3001/user/${userId}/average-sessions`
-	)
-	return response.data
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			resolve(mockData.averageSessions(userId))
+		}, 500)
+	})
 }
 
 export default getAverageSession

@@ -8,3 +8,10 @@ body,
 	height: 100%;
 	width: 100%;
 }
+
+.recharts-polar-grid-angle {
+	display: none;
+}
+.recharts-sector {
+	stroke-linecap: round;
+}
