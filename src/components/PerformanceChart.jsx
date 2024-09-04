@@ -7,7 +7,7 @@ import {
 	RadarChart,
 	ResponsiveContainer
 } from 'recharts'
-import getPerformance from '../services/performance.service'
+import getPerformance from '../services/mock/performance.service'
 import { useState } from 'react'
 
 const translateKind = (kind) => {
@@ -38,7 +38,6 @@ const PerformanceChart = ({ userId }) => {
 		const fetchUserPerformance = async () => {
 			const userPerformance = await getPerformance(userId)
 			setPerformance(userPerformance)
-			console.log(userPerformance)
 		}
 		fetchUserPerformance()
 	}, [userId])
@@ -59,7 +58,7 @@ const PerformanceChart = ({ userId }) => {
 					<PolarGrid />
 					<PolarAngleAxis
 						dataKey='kind'
-						tick={{ fill: 'white', fontSize: 14 }}
+						tick={{ fill: 'white', fontSize: 12 }}
 					/>
 					<Radar dataKey='value' fill='#FF0101' fillOpacity={0.7} />
 				</RadarChart>

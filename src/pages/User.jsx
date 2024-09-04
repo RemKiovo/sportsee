@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import getUser from '../services/user.service'
+import getUser from '../services/mock/user.service'
 import ActivityChart from '../components/ActivityChart'
 import AverageChart from '../components/AverageChart'
 import PerformanceChart from '../components/PerformanceChart'
 import ScoreChart from '../components/ScoreChart'
+import KeyValuesChart from '../components/KeyValuesChart'
 
 const User = () => {
 	const [user, setUser] = useState(null)
@@ -31,8 +32,9 @@ const User = () => {
 			<h2 className='py-5'>
 				Félicitation ! Vous avez explosé vos objectifs hier 👏
 			</h2>
-			<section className='grid grid-cols-3 grid-rows-2 gap-10 max-h-[60vh]'>
+			<section className='grid grid-cols-4 grid-rows-2 gap-10 max-h-[60vh]'>
 				<ActivityChart userId={id} />
+				<KeyValuesChart userId={id} />
 				<AverageChart userId={id} />
 				<PerformanceChart userId={id} />
 				<ScoreChart userId={id} />

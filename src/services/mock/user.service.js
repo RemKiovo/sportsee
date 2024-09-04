@@ -1,4 +1,4 @@
-import mockData from '../data/mockData'
+import mockData from '../../data/mockData'
 
 const getUser = async (userId) => {
 	return new Promise((resolve) => {

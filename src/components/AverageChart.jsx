@@ -1,6 +1,6 @@
 import propTypes from 'prop-types'
 import { useEffect } from 'react'
-import getAverageSession from '../services/averageSession.service'
+import getAverageSession from '../services/mock/averageSession.service'
 import { useState } from 'react'
 import {
 	Line,
