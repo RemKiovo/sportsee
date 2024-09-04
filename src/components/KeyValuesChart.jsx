@@ -16,8 +16,7 @@ const KeyValuesChart = ({ userId }) => {
 			setUserKeyValues(userData.keyData)
 		}
 		fetchUserKeyValues()
-		console.log(userKeyValues)
-	}, [userId, userKeyValues])
+	}, [userId])
 
 	if (!userKeyValues) return <article></article>
 
