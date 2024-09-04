@@ -14,7 +14,7 @@ const Header = () => {
 						<NavLink
 							key={index}
 							to={item.path}
-							className='py-5 px-10 text-white font-semibold'
+							className='my-5 mx-10 text-white font-semibold border-b border-transparent hover:border-white transition-all'
 						>
 							{item.label}
 						</NavLink>

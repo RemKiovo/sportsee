@@ -7,13 +7,17 @@ const icons = [meditate, swim, bike, weight]
 
 const Sider = () => {
 	return (
-		<div className='bg-black relative'>
+		<aside className='bg-black relative'>
 			<nav className='h-full flex flex-col justify-center items-center'>
 				<ul className='flex flex-col gap-5 px-5'>
 					{icons.map((icon, index) => (
 						<li key={index} className=''>
 							<a href='#'>
-								<img src={icon} alt='icon' className='h-14 w-14' />
+								<img
+									src={icon}
+									alt='icon'
+									className='h-14 w-14 hover:scale-110 transition-all'
+								/>
 							</a>
 						</li>
 					))}
@@ -22,7 +26,7 @@ const Sider = () => {
 					Copyright, SportSee 2020
 				</p>
 			</nav>
-		</div>
+		</aside>
 	)
 }
 export default Sider
