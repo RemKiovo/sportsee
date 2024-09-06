@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import getActivity from '../services/mock/activity.service'
+import { getActivity } from '../services/servicesClient'
 import {
 	BarChart,
 	Bar,
@@ -41,17 +41,31 @@ const CustomTooltip = ({ active, payload }) => {
 
 const ActivityChart = ({ userId }) => {
 	const [activity, setActivity] = useState(null)
+	const [error, setError] = useState(null)
+
 	useEffect(() => {
 		const userFecthActivity = async () => {
-			const userActivity = await getActivity(userId)
-			setActivity(userActivity)
+			try {
+				const userActivity = await getActivity(userId)
+				setActivity(userActivity)
+			} catch (error) {
+				console.error(error)
+				setError('Impossible de récupérer les données.')
+			}
 		}
 		userFecthActivity()
 	}, [userId])
 
-	if (!activity) return
+	if (error)
+		return (
+			<article className='rounded-lg relative bg-gray-50 flex justify-center items-center col-span-3'>
+				<p className='text-center text-black font-bold w-3/4'>{error}</p>
+			</article>
+		)
 
-	const data = activity.map((activity, index) => {
+	if (!activity) return <article></article>
+
+	const data = activity.sessions.map((activity, index) => {
 		return {
 			name: index + 1,
 			poids: activity.kilogram,

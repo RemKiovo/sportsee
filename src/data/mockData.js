@@ -32,45 +32,61 @@ const users = {
 }
 
 const activity = {
-	12: [
-		{ day: '2020-07-01', kilogram: 70, calories: 200 },
-		{ day: '2020-07-02', kilogram: 75, calories: 250 },
-		{ day: '2020-07-03', kilogram: 65, calories: 180 },
-		{ day: '2020-07-04', kilogram: 80, calories: 300 },
-		{ day: '2020-07-05', kilogram: 75, calories: 250 },
-		{ day: '2020-07-06', kilogram: 70, calories: 200 },
-		{ day: '2020-07-07', kilogram: 65, calories: 180 }
-	],
-	18: [
-		{ day: '2020-07-01', kilogram: 80, calories: 220 },
-		{ day: '2020-07-02', kilogram: 85, calories: 270 },
-		{ day: '2020-07-03', kilogram: 75, calories: 190 },
-		{ day: '2020-07-04', kilogram: 90, calories: 320 },
-		{ day: '2020-07-05', kilogram: 85, calories: 270 },
-		{ day: '2020-07-06', kilogram: 80, calories: 220 },
-		{ day: '2020-07-07', kilogram: 75, calories: 190 }
-	]
+	12: {
+		userId: 12,
+		sessions: [
+			{ day: '2020-07-01', kilogram: 70, calories: 200 },
+			{ day: '2020-07-02', kilogram: 75, calories: 250 },
+			{ day: '2020-07-03', kilogram: 65, calories: 180 },
+			{ day: '2020-07-04', kilogram: 80, calories: 300 },
+			{ day: '2020-07-05', kilogram: 75, calories: 250 },
+			{ day: '2020-07-06', kilogram: 70, calories: 200 },
+			{ day: '2020-07-07', kilogram: 65, calories: 180 }
+		]
+	},
+	18: {
+		userId: 18,
+		sessions: [
+			{ day: '2020-07-01', kilogram: 80, calories: 220 },
+			{ day: '2020-07-02', kilogram: 85, calories: 270 },
+			{ day: '2020-07-03', kilogram: 75, calories: 190 },
+			{ day: '2020-07-04', kilogram: 90, calories: 320 },
+			{ day: '2020-07-05', kilogram: 85, calories: 270 },
+			{ day: '2020-07-06', kilogram: 80, calories: 220 },
+			{ day: '2020-07-07', kilogram: 75, calories: 190 }
+		]
+	}
 }
 
 const averageSessions = {
-	12: [
-		{ day: 1, sessionLength: 30 },
-		{ day: 2, sessionLength: 23 },
-		{ day: 3, sessionLength: 45 },
-		{ day: 4, sessionLength: 50 },
-		{ day: 5, sessionLength: 0 },
-		{ day: 6, sessionLength: 0 },
-		{ day: 7, sessionLength: 60 }
-	],
-	18: [
-		{ day: 1, sessionLength: 30 },
-		{ day: 2, sessionLength: 40 },
-		{ day: 3, sessionLength: 50 },
-		{ day: 4, sessionLength: 30 },
-		{ day: 5, sessionLength: 30 },
-		{ day: 6, sessionLength: 50 },
-		{ day: 7, sessionLength: 50 }
-	]
+	12: {
+		data: {
+			userId: 12,
+			sessions: [
+				{ day: 1, sessionLength: 30 },
+				{ day: 2, sessionLength: 23 },
+				{ day: 3, sessionLength: 45 },
+				{ day: 4, sessionLength: 50 },
+				{ day: 5, sessionLength: 0 },
+				{ day: 6, sessionLength: 0 },
+				{ day: 7, sessionLength: 60 }
+			]
+		}
+	},
+	18: {
+		data: {
+			userId: 18,
+			sessions: [
+				{ day: 1, sessionLength: 30 },
+				{ day: 2, sessionLength: 40 },
+				{ day: 3, sessionLength: 50 },
+				{ day: 4, sessionLength: 30 },
+				{ day: 5, sessionLength: 30 },
+				{ day: 6, sessionLength: 50 },
+				{ day: 7, sessionLength: 50 }
+			]
+		}
+	}
 }
 
 const performances = {

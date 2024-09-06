@@ -20,6 +20,11 @@ const User = () => {
 		fetchUserData()
 	}, [userId])
 
+	useEffect(() => {
+		if (user)
+			document.title = `${userInfos.firstName} ${userInfos.lastName} Profile`
+	})
+
 	if (!user) return <p>Loading...</p>
 
 	const { id, userInfos } = user

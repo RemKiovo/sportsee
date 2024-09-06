@@ -1,6 +1,6 @@
 import propTypes from 'prop-types'
 import { useEffect } from 'react'
-import getAverageSession from '../services/mock/averageSession.service'
+import { getAverageSession } from '../services/servicesClient'
 import { useState } from 'react'
 import {
 	Line,
@@ -43,26 +43,58 @@ const CustomContent = ({ payload, active }) => {
 
 const AverageChart = ({ userId }) => {
 	const [average, setAverage] = useState(null)
+	const [error, setError] = useState(null)
 
 	useEffect(() => {
 		const fetchUserAverage = async () => {
-			const userAverage = await getAverageSession(userId)
-			setAverage(userAverage)
+			try {
+				const userAverage = await getAverageSession(userId)
+				setAverage(userAverage.data)
+			} catch (error) {
+				console.error(error)
+				setError('Impossible de récupérer les données.')
+			}
 		}
 		fetchUserAverage()
 	}, [userId])
 
-	if (!average) return <article></article>
+	if (error)
+		return (
+			<article className='rounded-lg relative bg-[#ff0000] flex justify-center items-center'>
+				<p className='text-center text-white font-bold w-3/4'>{error}</p>
+			</article>
+		)
 
-	const data = average.map((session) => ({
+	if (!average)
+		return (
+			<article className='rounded-lg relative bg-[#ff0000]'>
+				<header className='p-5 absolute top-0 left-0 w-2/3 font-bold z-10 pointer-events-none'>
+					<h3 className='text-white/50 '>Durée moyenne des sessions</h3>
+				</header>
+				<div className='h-[60vh] w-full'></div>
+				<footer className='absolute bottom-2 w-full pointer-events-none'>
+					<p className='flex justify-between px-4'>
+						{dayLabels.map((label, index) => (
+							<span key={index} className='text-white/50'>
+								{label}
+							</span>
+						))}
+					</p>
+				</footer>
+			</article>
+		)
+
+	const data = average.sessions.map((session) => ({
 		day: session.day,
 		sessionLength: session.sessionLength
 	}))
 
 	return (
 		<article className='bg-[#FF0000] rounded-lg overflow-clip relative'>
-			<header className='p-5 absolute top-0 left-0 w-2/3 font-bold z-10 pointer-events-none'>
-				<h3 className='text-white/50 '>Durée moyenne des sessions</h3>
+			<header className='p-5 absolute top-0 left-0 xl:w-2/3 w-full font-bold z-10 pointer-events-none'>
+				<h3 className='text-white/50 xl:text-base text-sm'>
+					Durée moyenne des sessions
+				</h3>
 			</header>
 			<ResponsiveContainer>
 				<LineChart
@@ -87,7 +119,7 @@ const AverageChart = ({ userId }) => {
 			<footer className='absolute bottom-2 w-full pointer-events-none'>
 				<p className='flex justify-between px-4'>
 					{dayLabels.map((label, index) => (
-						<span key={index} className='text-white/50'>
+						<span key={index} className='text-white/50 xl:text-sm text-xs'>
 							{label}
 						</span>
 					))}

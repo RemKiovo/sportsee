@@ -1,6 +1,6 @@
 import propTypes from 'prop-types'
 import { useEffect } from 'react'
-import getUser from '../services/mock/user.service'
+import { getUser } from '../services/servicesClient'
 import { useState } from 'react'
 import energyIcon from '/icons/energy.svg'
 import chickenIcon from '/icons/chicken.svg'
@@ -9,16 +9,32 @@ import burgerIcon from '/icons/cheeseburger.svg'
 
 const KeyValuesChart = ({ userId }) => {
 	const [userKeyValues, setUserKeyValues] = useState(null)
+	const [error, setError] = useState(null)
+
 	useEffect(() => {
 		const fetchUserKeyValues = async () => {
-			const userData = await getUser(userId)
-
-			setUserKeyValues(userData.keyData)
+			try {
+				const userData = await getUser(userId)
+				setUserKeyValues(userData.keyData)
+			} catch (error) {
+				console.error(error)
+				setError('Impossible de récupérer les données.')
+			}
 		}
 		fetchUserKeyValues()
 	}, [userId])
 
-	if (!userKeyValues) return <article></article>
+	if (error)
+		return (
+			<article className='rounded-lg relative bg-gray-50 flex justify-center items-center row-span-2 min-h-[60vh]'>
+				<p className='text-center text-black font-bold w-3/4'>{error}</p>
+			</article>
+		)
+
+	if (!userKeyValues)
+		return (
+			<article className='rounded-lg relative bg-gray-50 flex justify-center items-center row-span-2 min-h-[60vh]'></article>
+		)
 
 	const data = [
 		{
@@ -57,13 +73,15 @@ const KeyValuesChart = ({ userId }) => {
 					className='flex items-center gap-5 bg-gray-50 p-5 rounded-lg'
 				>
 					<figure
-						className={`${item.color} bg-opacity-20 flex justify-center items-center rounded-lg`}
+						className={`${item.color} bg-opacity-20 flex justify-center items-center rounded-lg h-10 w-10`}
 					>
-						<img src={item.icon} alt={item.name} className='p-5' />
+						<img src={item.icon} alt={item.name} className='h-5 w-5 m-3' />
 					</figure>
 					<figcaption className='flex flex-col flex-grow'>
-						<span className='font-bold text-xl'>{item.value}</span>
-						<span className='font-black opacity-50'>{item.name}</span>
+						<span className='font-bold xl:text-xl text-sm'>{item.value}</span>
+						<span className='font-black opacity-50 xl:text-sm text-xs'>
+							{item.name}
+						</span>
 					</figcaption>
 				</article>
 			))}

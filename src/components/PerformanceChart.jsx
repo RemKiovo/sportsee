@@ -7,7 +7,7 @@ import {
 	RadarChart,
 	ResponsiveContainer
 } from 'recharts'
-import getPerformance from '../services/mock/performance.service'
+import { getPerformance } from '../services/servicesClient'
 import { useState } from 'react'
 
 const translateKind = (kind) => {
@@ -33,16 +33,29 @@ const translateKind = (kind) => {
 
 const PerformanceChart = ({ userId }) => {
 	const [performance, setPerformance] = useState(null)
+	const [error, setError] = useState(null)
 
 	useEffect(() => {
 		const fetchUserPerformance = async () => {
-			const userPerformance = await getPerformance(userId)
-			setPerformance(userPerformance)
+			try {
+				const userPerformance = await getPerformance(userId)
+				setPerformance(userPerformance)
+			} catch (error) {
+				console.error(error)
+				setError('Impossible de récupérer les données.')
+			}
 		}
 		fetchUserPerformance()
 	}, [userId])
 
-	if (!performance) return <article></article>
+	if (!performance || error)
+		return (
+			<article className='rounded-lg relative bg-[#282D30] flex justify-center items-center'>
+				<p className='text-center text-white font-bold w-3/4'>
+					{error || 'Impossible de récupérer les données.'}
+				</p>
+			</article>
+		)
 
 	const data = performance.data.data.map((item) => {
 		return {
