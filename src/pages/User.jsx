@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import getUser from '../services/mock/user.service'
+import { getUser } from '../services/servicesClient'
 import ActivityChart from '../components/ActivityChart'
 import AverageChart from '../components/AverageChart'
 import PerformanceChart from '../components/PerformanceChart'
