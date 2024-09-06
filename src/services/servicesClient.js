@@ -8,8 +8,8 @@ import getAverageSessionApi from './api/averageSession.service'
 import getPerformanceApi from './api/performance.service'
 import getUserApi from './api/user.service'
 
+// This is used to switch between the mock and api
 const useMock = import.meta.env.VITE_USE_MOCK === 'true'
-console.log(`Using mock ? : ${useMock}`)
 
 const getActivity = useMock ? getActivityMock : getActivityApi
 const getAverageSession = useMock ? getAverageSessionMock : getAverageSessionApi

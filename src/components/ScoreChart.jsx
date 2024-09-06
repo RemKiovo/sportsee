@@ -7,6 +7,11 @@ import { useState } from 'react'
 const ScoreChart = ({ userId }) => {
 	const [userScore, setUserScore] = useState(null)
 	const [error, setError] = useState(null)
+	const [radius, setRadius] = useState(90)
+
+	const handleResize = () => {
+		setRadius(window.innerWidth < 1280 ? 65 : 90)
+	}
 
 	useEffect(() => {
 		const fetchUserScore = async () => {
@@ -21,6 +26,13 @@ const ScoreChart = ({ userId }) => {
 		}
 		fetchUserScore()
 	}, [userId, userScore])
+
+	useEffect(() => {
+		handleResize()
+		window.addEventListener('resize', handleResize)
+
+		return () => window.removeEventListener('resize', handleResize)
+	}, [])
 
 	const data = [
 		{ name: 'Score', score: userScore ? userScore : 0 },
@@ -37,8 +49,8 @@ const ScoreChart = ({ userId }) => {
 	if (!userScore)
 		return (
 			<article className='rounded-lg relative bg-gray-50'>
-				<header className='p-5 font-bold absolute top-0 left-0'>
-					<h3>Score</h3>
+				<header className='p-5 absolute top-0 left-0 xl:w-2/3 w-full font-bold z-10 pointer-events-none'>
+					<h3 className='text-black xl:text-base text-sm'>Score</h3>
 				</header>
 				<div className='h-full w-full flex justify-center items-center'>
 					<p className='text-center text-black font-bold w-3/4 xl:text-base text-sm'>
@@ -50,8 +62,8 @@ const ScoreChart = ({ userId }) => {
 
 	return (
 		<article className='rounded-lg relative bg-gray-50'>
-			<header className='p-5 font-bold absolute top-0 left-0'>
-				<h3>Score</h3>
+			<header className='p-5 absolute top-0 left-0 xl:w-2/3 w-full font-bold z-10 pointer-events-none'>
+				<h3 className='text-black xl:text-base text-sm'>Score</h3>
 			</header>
 			<ResponsiveContainer width='100%' height='100%'>
 				<PieChart>
@@ -60,8 +72,8 @@ const ScoreChart = ({ userId }) => {
 						data={data}
 						cx='50%'
 						cy='50%'
-						outerRadius={90}
-						innerRadius={80}
+						outerRadius={radius}
+						innerRadius={radius - 10}
 						startAngle={90}
 						endAngle={720}
 						stroke='none'
@@ -72,10 +84,12 @@ const ScoreChart = ({ userId }) => {
 					</Pie>
 				</PieChart>
 			</ResponsiveContainer>
-			<footer className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center'>
-				<p className='text-center text-3xl font-bold'>
+			<footer className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center'>
+				<p className='text-center xl:text-3xl text-lg font-bold'>
 					{userScore}%<br />
-					<span className='text-sm text-black/50'>de votre objectif</span>
+					<span className='xl:text-sm text-xs text-black/50'>
+						de votre objectif
+					</span>
 				</p>
 			</footer>
 		</article>
