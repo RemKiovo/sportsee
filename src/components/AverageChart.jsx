@@ -1,6 +1,6 @@
 import propTypes from 'prop-types'
 import { useEffect } from 'react'
-import getAverageSession from '../services/averageSession.service'
+import getAverageSession from '../services/mock/averageSession.service'
 import { useState } from 'react'
 import {
 	Line,
@@ -61,7 +61,7 @@ const AverageChart = ({ userId }) => {
 
 	return (
 		<article className='bg-[#FF0000] rounded-lg overflow-clip relative'>
-			<header className='p-5 absolute top-0 left-0 w-2/3 font-bold z-10'>
+			<header className='p-5 absolute top-0 left-0 w-2/3 font-bold z-10 pointer-events-none'>
 				<h3 className='text-white/50 '>Durée moyenne des sessions</h3>
 			</header>
 			<ResponsiveContainer>
@@ -84,7 +84,7 @@ const AverageChart = ({ userId }) => {
 					/>
 				</LineChart>
 			</ResponsiveContainer>
-			<footer className='absolute bottom-2 w-full'>
+			<footer className='absolute bottom-2 w-full pointer-events-none'>
 				<p className='flex justify-between px-4'>
 					{dayLabels.map((label, index) => (
 						<span key={index} className='text-white/50'>

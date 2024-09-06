@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import getActivity from '../services/activity.service'
+import getActivity from '../services/mock/activity.service'
 import {
 	BarChart,
 	Bar,
@@ -60,7 +60,7 @@ const ActivityChart = ({ userId }) => {
 	})
 
 	return (
-		<article className='bg-gray-50 p-5 pb-10 col-span-full'>
+		<article className='bg-gray-50 p-5 pb-10 col-span-3 rounded-lg'>
 			<header className='flex justify-between'>
 				<h3>Activité quotidienne</h3>
 				<div className='text-black/50 flex gap-10 '>
