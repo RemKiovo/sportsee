@@ -4,7 +4,7 @@ import { MENUTITEMS } from '../constants'
 
 const Header = () => {
 	return (
-		<header>
+		<header className='fixed top-0 left-0 w-full z-50'>
 			<nav className='flex items-center gap-5 bg-black px-5'>
 				<Link>
 					<img src='/logo.png' alt='' className='w-36' />

@@ -21,12 +21,12 @@ L'objectif de ce projet est de créer une nouvelle version de la page profil uti
 
 ## Technologie Utilisée
 
-- **Frontend :** React
-- **Bundler :** Vite
-- **Bibliothèque pour les graphiques :** Recharts
+- **Frontend :** React v18.3.1
+- **Bundler :** Vite v5.4.1
+- **Bibliothèque pour les graphiques :** Recharts v2.12.7 ()
 - **Backend :** Node.js (API disponible pour récupérer les données utilisateur)
-- **HTTP Client :** Axios
-- **CSS :** Tailwind pour le styling, focus sur l'intégration desktop (résolution minimale de 1024x780 pixels)
+- **HTTP Client :** Axios v1.7.5
+- **CSS :** Tailwind v3.4.10 pour le styling, focus sur l'intégration desktop (résolution minimale de 1024x780 pixels)
 
 ## Installation du Projet
 

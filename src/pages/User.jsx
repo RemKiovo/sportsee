@@ -7,15 +7,21 @@ import AverageChart from '../components/AverageChart'
 import PerformanceChart from '../components/PerformanceChart'
 import ScoreChart from '../components/ScoreChart'
 import KeyValuesChart from '../components/KeyValuesChart'
+import { AxiosError } from 'axios'
 
 const User = () => {
 	const [user, setUser] = useState(null)
+	const [error, setError] = useState(null)
 	const { userId } = useParams()
 
 	useEffect(() => {
 		const fetchUserData = async () => {
-			const user = await getUser(userId)
-			setUser(user)
+			try {
+				const user = await getUser(userId)
+				setUser(user)
+			} catch (error) {
+				setError(error)
+			}
 		}
 		fetchUserData()
 	}, [userId])
@@ -23,26 +29,40 @@ const User = () => {
 	useEffect(() => {
 		if (user)
 			document.title = `${userInfos.firstName} ${userInfos.lastName} Profile`
-	})
+	}, [user])
 
-	if (!user) return <p>Loading...</p>
+	if (error instanceof Error)
+		return (
+			<main className='flex-1 pl-32 pr-14 pt-24 flex justify-center items-center'>
+				<p className='text-3xl text-red-500'>
+					Le profil de l'utilisateur n'existe pas
+				</p>
+			</main>
+		)
+
+	if (!user)
+		return (
+			<main className='flex-1 pl-32 pr-14 pt-24 flex justify-center items-center'>
+				<p className='text-3xl text-red-500'>Chargement...</p>
+			</main>
+		)
 
 	const { id, userInfos } = user
 
 	return (
-		<main className='flex-1 px-14 py-10'>
+		<main className='flex-1 pl-32 pr-14 pt-24'>
 			<h1 className='text-5xl'>
 				Bonjour <span className='text-[#FF0101]'>{userInfos.firstName}</span>
 			</h1>
 			<h2 className='py-5'>
 				Félicitation ! Vous avez explosé vos objectifs hier 👏
 			</h2>
-			<section className='grid grid-cols-4 grid-rows-2 gap-10 max-h-[60vh]'>
+			<section className='grid xl:grid-cols-4 grid-cols-3 xl:grid-rows-2 grid-rows-3 grid-flow-col xl:gap-10 gap-5 max-h-[80vh] xl:max-h-[60vh]'>
 				<ActivityChart userId={id} />
-				<KeyValuesChart userId={id} />
 				<AverageChart userId={id} />
 				<PerformanceChart userId={id} />
 				<ScoreChart userId={id} />
+				<KeyValuesChart userId={id} />
 			</section>
 		</main>
 	)

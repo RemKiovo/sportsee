@@ -74,7 +74,7 @@ const ActivityChart = ({ userId }) => {
 	})
 
 	return (
-		<article className='bg-gray-50 p-5 pb-10 col-span-3 rounded-lg'>
+		<article className='bg-gray-50 p-5 pb-10 rounded-lg col-span-3'>
 			<header className='flex justify-between'>
 				<h3>Activité quotidienne</h3>
 				<div className='text-black/50 flex gap-10 '>

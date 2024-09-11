@@ -7,7 +7,7 @@ const icons = [meditate, swim, bike, weight]
 
 const Sider = () => {
 	return (
-		<aside className='bg-black relative'>
+		<aside className='bg-black fixed top-0 left-0 w-24 h-full z-40'>
 			<nav className='h-full flex flex-col justify-center items-center'>
 				<ul className='flex flex-col gap-5 px-5'>
 					{icons.map((icon, index) => (

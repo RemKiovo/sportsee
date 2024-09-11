@@ -26,14 +26,14 @@ const KeyValuesChart = ({ userId }) => {
 
 	if (error)
 		return (
-			<article className='rounded-lg relative bg-gray-50 flex justify-center items-center row-span-2 min-h-[60vh]'>
+			<article className='flex xl:flex-col flex-row xl:row-span-full justify-between xl:items-center items-start row-start-3 col-span-full xl:col-span-1 xl:col-start-4'>
 				<p className='text-center text-black font-bold w-3/4'>{error}</p>
 			</article>
 		)
 
 	if (!userKeyValues)
 		return (
-			<article className='rounded-lg relative bg-gray-50 flex justify-center items-center row-span-2 min-h-[60vh]'></article>
+			<article className='flex xl:flex-col flex-row xl:row-span-full justify-between xl:items-center items-start row-start-3 col-span-full xl:col-span-1 xl:col-start-4'></article>
 		)
 
 	const data = [
@@ -66,11 +66,11 @@ const KeyValuesChart = ({ userId }) => {
 	]
 
 	return (
-		<section className='flex flex-col row-span-2 justify-between '>
+		<aside className='flex xl:flex-col flex-row xl:row-span-full justify-between xl:items-center items-start row-start-3 col-span-full xl:col-span-1 xl:col-start-4'>
 			{data.map((item, index) => (
 				<article
 					key={index}
-					className='flex items-center gap-5 bg-gray-50 p-5 rounded-lg'
+					className='flex items-center gap-5 min-w-[200px] bg-gray-50 p-5 rounded-lg'
 				>
 					<figure
 						className={`${item.color} bg-opacity-20 flex justify-center items-center rounded-lg h-10 w-10`}
@@ -85,7 +85,7 @@ const KeyValuesChart = ({ userId }) => {
 					</figcaption>
 				</article>
 			))}
-		</section>
+		</aside>
 	)
 }
 export default KeyValuesChart
