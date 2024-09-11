@@ -7,7 +7,6 @@ import AverageChart from '../components/AverageChart'
 import PerformanceChart from '../components/PerformanceChart'
 import ScoreChart from '../components/ScoreChart'
 import KeyValuesChart from '../components/KeyValuesChart'
-import { AxiosError } from 'axios'
 
 const User = () => {
 	const [user, setUser] = useState(null)
@@ -26,16 +25,11 @@ const User = () => {
 		fetchUserData()
 	}, [userId])
 
-	useEffect(() => {
-		if (user)
-			document.title = `${userInfos.firstName} ${userInfos.lastName} Profile`
-	}, [user])
-
 	if (error instanceof Error)
 		return (
 			<main className='flex-1 pl-32 pr-14 pt-24 flex justify-center items-center'>
 				<p className='text-3xl text-red-500'>
-					Le profil de l'utilisateur n'existe pas
+					Le profil de l&apos;utilisateur n&apos;existe pas
 				</p>
 			</main>
 		)
@@ -47,7 +41,7 @@ const User = () => {
 			</main>
 		)
 
-	const { id, userInfos } = user
+	const { userInfos, id } = user
 
 	return (
 		<main className='flex-1 pl-32 pr-14 pt-24'>
