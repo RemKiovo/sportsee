@@ -8,12 +8,22 @@ import PerformanceChart from '../components/PerformanceChart'
 import ScoreChart from '../components/ScoreChart'
 import KeyValuesChart from '../components/KeyValuesChart'
 
+/**
+ * User
+ * @returns {React.ReactNode}
+ * @description User page component
+ */
 const User = () => {
 	const [user, setUser] = useState(null)
 	const [error, setError] = useState(null)
 	const { userId } = useParams()
 
 	useEffect(() => {
+		/**
+		 * fetchUserData
+		 * @description Fetches user data from the API
+		 * @async
+		 */
 		const fetchUserData = async () => {
 			try {
 				const user = await getUser(userId)
@@ -51,13 +61,13 @@ const User = () => {
 			<h2 className='py-5'>
 				Félicitation ! Vous avez explosé vos objectifs hier 👏
 			</h2>
-			<section className='grid xl:grid-cols-4 grid-cols-3 xl:grid-rows-2 grid-rows-3 grid-flow-col xl:gap-10 gap-5 max-h-[80vh] xl:max-h-[60vh]'>
+			<div className='grid xl:grid-cols-4 grid-cols-3 xl:grid-rows-2 grid-rows-3 grid-flow-col xl:gap-10 gap-5 max-h-[80vh] xl:max-h-[60vh]'>
 				<ActivityChart userId={id} />
 				<AverageChart userId={id} />
 				<PerformanceChart userId={id} />
 				<ScoreChart userId={id} />
 				<KeyValuesChart userId={id} />
-			</section>
+			</div>
 		</main>
 	)
 }

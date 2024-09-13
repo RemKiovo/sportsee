@@ -1,5 +1,5 @@
 import propTypes from 'prop-types'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import {
 	PolarAngleAxis,
 	PolarGrid,
@@ -8,34 +8,23 @@ import {
 	ResponsiveContainer
 } from 'recharts'
 import { getPerformance } from '../services/servicesClient'
-import { useState } from 'react'
+import { translateKind } from '../constants'
 
-const translateKind = (kind) => {
-	switch (kind) {
-		case 'cardio':
-			return 'Cardio'
-		case 'energy':
-			return 'Énergie'
-		case 'strength':
-			return 'Force'
-		case 'endurance':
-			return 'Endurance'
-		case 'speed':
-			return 'Vitesse'
-		case 'flexibility':
-			return 'Fléxibilité'
-		case 'intensity':
-			return 'Intensité'
-		default:
-			return kind
-	}
-}
-
+/**
+ * PerformanceChart
+ * @param {object} props
+ * @returns {React.ReactNode}
+ * @description Creates a performance chart with the user's performance data
+ */
 const PerformanceChart = ({ userId }) => {
 	const [performance, setPerformance] = useState(null)
 	const [error, setError] = useState(null)
 
 	useEffect(() => {
+		/**
+		 * Asynchronous function to fetch user performance data
+		 * @async
+		 */
 		const fetchUserPerformance = async () => {
 			try {
 				const userPerformance = await getPerformance(userId)
@@ -50,22 +39,20 @@ const PerformanceChart = ({ userId }) => {
 
 	if (!performance || error)
 		return (
-			<article className='rounded-lg relative bg-[#282D30] flex justify-center items-center'>
+			<section className='rounded-lg relative bg-[#282D30] flex justify-center items-center'>
 				<p className='text-center text-white font-bold w-3/4'>
 					{error || 'Impossible de récupérer les données.'}
 				</p>
-			</article>
+			</section>
 		)
 
-	const data = performance.data.data.map((item) => {
-		return {
-			kind: translateKind(performance.data.kind[item.kind]),
-			value: item.value
-		}
-	})
+	const data = performance.data.data.map((item) => ({
+		kind: translateKind(performance.data.kind[item.kind]),
+		value: item.value
+	}))
 
 	return (
-		<article className='bg-[#282D30] rounded-lg'>
+		<section className='bg-[#282D30] rounded-lg'>
 			<ResponsiveContainer width='100%' height='100%'>
 				<RadarChart cx='50%' cy='50%' outerRadius='70%' data={data}>
 					<PolarGrid />
@@ -76,7 +63,7 @@ const PerformanceChart = ({ userId }) => {
 					<Radar dataKey='value' fill='#FF0101' fillOpacity={0.7} />
 				</RadarChart>
 			</ResponsiveContainer>
-		</article>
+		</section>
 	)
 }
 export default PerformanceChart

@@ -23,10 +23,14 @@ L'objectif de ce projet est de créer une nouvelle version de la page profil uti
 
 - **Frontend :** React v18.3.1
 - **Bundler :** Vite v5.4.1
-- **Bibliothèque pour les graphiques :** Recharts v2.12.7 ()
+- **Bibliothèque pour les graphiques :** Recharts v2.12.7
 - **Backend :** Node.js (API disponible pour récupérer les données utilisateur)
 - **HTTP Client :** Axios v1.7.5
 - **CSS :** Tailwind v3.4.10 pour le styling, focus sur l'intégration desktop (résolution minimale de 1024x780 pixels)
+
+### A noté
+
+Le composant **BarChart** renvoie des erreurs qui sont corrigées dans la version 2.13 de **Recharts**. Actuellement cette version n'est disponible que en alpha au jour de la rédaction du README (10/9/2024). À mettre à jour dès que possible.
 
 ## Installation du Projet
 
@@ -55,7 +59,7 @@ npm run dev
 
 ## Développement
 
-### User Stories à Intégrer\*\*
+### User Stories à Intégrer
 
 Pour ce sprint, je vais intégrer les User Stories de la partie TODO du Kanban. Cela inclut la création des composants React pour afficher les données de l'utilisateur, telles que le nombre de sessions réalisées et les calories brûlées, ainsi que la gestion des états et des interactions utilisateurs.
 

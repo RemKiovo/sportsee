@@ -13,6 +13,12 @@ import {
 import { useState } from 'react'
 import propTypes from 'prop-types'
 
+/**
+ * SmallerBar
+ * @param {object} props
+ * @returns {React.ReactNode}
+ * @description Custom bar size for the activity chart
+ */
 const SmallerBar = (props) => {
 	const { x, y, height, width, fill } = props
 	return (
@@ -27,6 +33,12 @@ const SmallerBar = (props) => {
 	)
 }
 
+/**
+ * CustomTooltip
+ * @param {object} props
+ * @returns {React.ReactNode}
+ * @description Creates a custom tooltip for the activity chart
+ */
 const CustomTooltip = ({ active, payload }) => {
 	if (active && payload && payload.length) {
 		return (
@@ -39,11 +51,24 @@ const CustomTooltip = ({ active, payload }) => {
 	return null
 }
 
+/**
+ * ActivityChart
+ * @param {object} props
+ * @returns {React.ReactNode}
+ * @description Creates an activity chart with the user's activity data
+ */
 const ActivityChart = ({ userId }) => {
 	const [activity, setActivity] = useState(null)
 	const [error, setError] = useState(null)
 
+	/**
+	 * Fetches user activity data when the component mounts or userId changes
+	 */
 	useEffect(() => {
+		/**
+		 * Asynchronous function to fetch user activity data
+		 * @async
+		 */
 		const userFecthActivity = async () => {
 			try {
 				const userActivity = await getActivity(userId)
@@ -58,12 +83,12 @@ const ActivityChart = ({ userId }) => {
 
 	if (error)
 		return (
-			<article className='rounded-lg relative bg-gray-50 flex justify-center items-center col-span-3'>
+			<section className='rounded-lg relative bg-gray-50 flex justify-center items-center col-span-3'>
 				<p className='text-center text-black font-bold w-3/4'>{error}</p>
-			</article>
+			</section>
 		)
 
-	if (!activity) return <article></article>
+	if (!activity) return <section></section>
 
 	const data = activity.sessions.map((activity, index) => {
 		return {
@@ -74,7 +99,7 @@ const ActivityChart = ({ userId }) => {
 	})
 
 	return (
-		<article className='bg-gray-50 p-5 pb-10 rounded-lg col-span-3'>
+		<section className='bg-gray-50 p-5 pb-10 rounded-lg col-span-3'>
 			<header className='flex justify-between'>
 				<h3>Activité quotidienne</h3>
 				<div className='text-black/50 flex gap-10 '>
@@ -114,7 +139,7 @@ const ActivityChart = ({ userId }) => {
 					/>
 				</BarChart>
 			</ResponsiveContainer>
-		</article>
+		</section>
 	)
 }
 export default ActivityChart

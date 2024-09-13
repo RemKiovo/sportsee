@@ -1,5 +1,11 @@
 import mockData from '../../data/mockData'
 
+/**
+ * getUser
+ * @param {number} userId
+ * @returns {Promise<object>}
+ * @description Fetches user data from the mock data
+ */
 const getUser = async (userId) => {
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {

@@ -7,11 +7,25 @@ import chickenIcon from '/icons/chicken.svg'
 import appleIcon from '/icons/apple.svg'
 import burgerIcon from '/icons/cheeseburger.svg'
 
+/**
+ * Component to display key nutritional values in a chart format.
+ * @component
+ * @param {Object} props - Component props
+ * @param {number} props.userId - The ID of the user to fetch data for
+ * @returns {JSX.Element} The rendered KeyValuesChart component
+ */
 const KeyValuesChart = ({ userId }) => {
 	const [userKeyValues, setUserKeyValues] = useState(null)
 	const [error, setError] = useState(null)
 
+	/**
+	 * Fetches user key values when the component mounts or userId changes
+	 */
 	useEffect(() => {
+		/**
+		 * Asynchronous function to fetch user data
+		 * @async
+		 */
 		const fetchUserKeyValues = async () => {
 			try {
 				const userData = await getUser(userId)
@@ -36,6 +50,10 @@ const KeyValuesChart = ({ userId }) => {
 			<article className='flex xl:flex-col flex-row xl:row-span-full justify-between xl:items-center items-start row-start-3 col-span-full xl:col-span-1 xl:col-start-4'></article>
 		)
 
+	/**
+	 * Array of nutritional data objects
+	 * @type {Array<{name: string, value: string, icon: string, color: string}>}
+	 */
 	const data = [
 		{
 			name: 'Calories',
@@ -88,7 +106,9 @@ const KeyValuesChart = ({ userId }) => {
 		</aside>
 	)
 }
+
 export default KeyValuesChart
+
 KeyValuesChart.propTypes = {
 	userId: propTypes.number.isRequired
 }

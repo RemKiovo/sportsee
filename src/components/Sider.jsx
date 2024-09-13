@@ -5,6 +5,11 @@ import weight from '/sidebar/weight.png'
 
 const icons = [meditate, swim, bike, weight]
 
+/**
+ * Sider
+ * @returns {React.ReactNode}
+ * @description Creates a sidebar with a navigation menu
+ */
 const Sider = () => {
 	return (
 		<aside className='bg-black fixed top-0 left-0 w-24 h-full z-40'>

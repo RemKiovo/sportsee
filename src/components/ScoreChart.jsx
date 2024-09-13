@@ -4,6 +4,12 @@ import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts'
 import { getUser } from '../services/servicesClient'
 import { useState } from 'react'
 
+/**
+ * ScoreChart
+ * @param {object} props
+ * @returns {React.ReactNode}
+ * @description Creates a score chart with the user's score data
+ */
 const ScoreChart = ({ userId }) => {
 	const [userScore, setUserScore] = useState(null)
 	const [error, setError] = useState(null)
@@ -14,6 +20,10 @@ const ScoreChart = ({ userId }) => {
 	}
 
 	useEffect(() => {
+		/**
+		 * Asynchronous function to fetch user score data
+		 * @async
+		 */
 		const fetchUserScore = async () => {
 			try {
 				let getUserScore = await getUser(userId)
