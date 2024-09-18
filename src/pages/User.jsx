@@ -35,6 +35,7 @@ const User = () => {
 		fetchUserData()
 	}, [userId])
 
+	// If the error is an instance of Error, display the error message
 	if (error instanceof Error)
 		return (
 			<main className='flex-1 pl-32 pr-14 pt-24 flex justify-center items-center'>
@@ -44,6 +45,7 @@ const User = () => {
 			</main>
 		)
 
+	// If the user is not loaded, display a loading message
 	if (!user)
 		return (
 			<main className='flex-1 pl-32 pr-14 pt-24 flex justify-center items-center'>

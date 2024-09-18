@@ -104,40 +104,42 @@ const AverageChart = ({ userId }) => {
 
 	return (
 		<section className='bg-[#FF0000] rounded-lg overflow-clip relative'>
-			<header className='p-5 absolute top-0 left-0 xl:w-2/3 w-full font-bold z-10 pointer-events-none'>
-				<h3 className='text-white/50 xl:text-base text-sm'>
-					Durée moyenne des sessions
-				</h3>
-			</header>
-			<ResponsiveContainer>
-				<LineChart
-					data={data}
-					margin={{ left: -10, right: 0, bottom: 60, top: 60 }}
-				>
-					<Tooltip
-						cursor={<CustomTooltipCursor />}
-						content={<CustomContent />}
-					/>
-					<Line
-						type='bump'
-						animationBegin={0}
-						dataKey='sessionLength'
-						stroke='#fff'
-						opacity={0.5}
-						strokeWidth={2}
-						dot={false}
-					/>
-				</LineChart>
-			</ResponsiveContainer>
-			<footer className='absolute bottom-2 w-full pointer-events-none'>
-				<p className='flex justify-between px-4'>
-					{DAYS.map((label, index) => (
-						<span key={index} className='text-white/50 xl:text-sm text-xs'>
-							{label}
-						</span>
-					))}
-				</p>
-			</footer>
+			<article className='w-full h-full'>
+				<header className='p-5 absolute top-0 left-0 xl:w-2/3 w-full font-bold z-10 pointer-events-none'>
+					<h3 className='text-white/50 xl:text-base text-sm'>
+						Durée moyenne des sessions
+					</h3>
+				</header>
+				<ResponsiveContainer>
+					<LineChart
+						data={data}
+						margin={{ left: -10, right: 0, bottom: 60, top: 60 }}
+					>
+						<Tooltip
+							cursor={<CustomTooltipCursor />}
+							content={<CustomContent />}
+						/>
+						<Line
+							type='bump'
+							animationBegin={0}
+							dataKey='sessionLength'
+							stroke='#fff'
+							opacity={0.5}
+							strokeWidth={2}
+							dot={false}
+						/>
+					</LineChart>
+				</ResponsiveContainer>
+				<footer className='absolute bottom-2 w-full pointer-events-none'>
+					<p className='flex justify-between px-4'>
+						{DAYS.map((label, index) => (
+							<span key={index} className='text-white/50 xl:text-sm text-xs'>
+								{label}
+							</span>
+						))}
+					</p>
+				</footer>
+			</article>
 		</section>
 	)
 }

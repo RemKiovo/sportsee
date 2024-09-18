@@ -51,14 +51,14 @@ const ScoreChart = ({ userId }) => {
 
 	if (error)
 		return (
-			<article className='rounded-lg relative bg-gray-50 flex justify-center items-center'>
+			<section className='rounded-lg relative bg-gray-50 flex justify-center items-center'>
 				<p className='text-center font-bold w-3/4'>{error}</p>
-			</article>
+			</section>
 		)
 
 	if (!userScore)
 		return (
-			<article className='rounded-lg relative bg-gray-50'>
+			<section className='rounded-lg relative bg-gray-50'>
 				<header className='p-5 absolute top-0 left-0 xl:w-2/3 w-full font-bold z-10 pointer-events-none'>
 					<h3 className='text-black xl:text-base text-sm'>Score</h3>
 				</header>
@@ -67,42 +67,44 @@ const ScoreChart = ({ userId }) => {
 						Aucune données disponible
 					</p>
 				</div>
-			</article>
+			</section>
 		)
 
 	return (
-		<article className='rounded-lg relative bg-gray-50'>
-			<header className='p-5 absolute top-0 left-0 xl:w-2/3 w-full font-bold z-10 pointer-events-none'>
-				<h3 className='text-black xl:text-base text-sm'>Score</h3>
-			</header>
-			<ResponsiveContainer width='100%' height='100%'>
-				<PieChart>
-					<Pie
-						dataKey='score'
-						data={data}
-						cx='50%'
-						cy='50%'
-						outerRadius={radius}
-						innerRadius={radius - 10}
-						startAngle={90}
-						endAngle={720}
-						stroke='none'
-						cornerRadius={100}
-					>
-						<Cell fill='red' className='rounded-full' />
-						<Cell fill='none' />
-					</Pie>
-				</PieChart>
-			</ResponsiveContainer>
-			<footer className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center'>
-				<p className='text-center xl:text-3xl text-lg font-bold'>
-					{userScore}%<br />
-					<span className='xl:text-sm text-xs text-black/50'>
-						de votre objectif
-					</span>
-				</p>
-			</footer>
-		</article>
+		<section className='rounded-lg relative bg-gray-50'>
+			<article className='w-full h-full'>
+				<header className='p-5 absolute top-0 left-0 xl:w-2/3 w-full font-bold z-10 pointer-events-none'>
+					<h3 className='text-black xl:text-base text-sm'>Score</h3>
+				</header>
+				<ResponsiveContainer width='100%' height='100%'>
+					<PieChart>
+						<Pie
+							dataKey='score'
+							data={data}
+							cx='50%'
+							cy='50%'
+							outerRadius={radius}
+							innerRadius={radius - 10}
+							startAngle={90}
+							endAngle={720}
+							stroke='none'
+							cornerRadius={100}
+						>
+							<Cell fill='red' className='rounded-full' />
+							<Cell fill='none' />
+						</Pie>
+					</PieChart>
+				</ResponsiveContainer>
+				<footer className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center'>
+					<p className='text-center xl:text-3xl text-lg font-bold'>
+						{userScore}%<br />
+						<span className='xl:text-sm text-xs text-black/50'>
+							de votre objectif
+						</span>
+					</p>
+				</footer>
+			</article>
+		</section>
 	)
 }
 

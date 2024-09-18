@@ -85,6 +85,7 @@ const KeyValuesChart = ({ userId }) => {
 
 	return (
 		<aside className='flex xl:flex-col flex-row xl:row-span-full justify-between xl:items-center items-start row-start-3 col-span-full xl:col-span-1 xl:col-start-4'>
+			<h3 className='sr-only'>Valeurs Clés</h3>
 			{data.map((item, index) => (
 				<article
 					key={index}

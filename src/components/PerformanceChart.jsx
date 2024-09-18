@@ -8,7 +8,17 @@ import {
 	ResponsiveContainer
 } from 'recharts'
 import { getPerformance } from '../services/servicesClient'
-import { translateKind } from '../constants'
+import { PERFORMANCE_LABELS } from '../constants'
+
+/**
+ * translateKind
+ * @param {string} kind
+ * @returns {string}
+ * @description Translates the kind of performance to French
+ */
+const translateKind = (kind) => {
+	return PERFORMANCE_LABELS[kind] || kind
+}
 
 /**
  * PerformanceChart
@@ -53,16 +63,19 @@ const PerformanceChart = ({ userId }) => {
 
 	return (
 		<section className='bg-[#282D30] rounded-lg'>
-			<ResponsiveContainer width='100%' height='100%'>
-				<RadarChart cx='50%' cy='50%' outerRadius='70%' data={data}>
-					<PolarGrid />
-					<PolarAngleAxis
-						dataKey='kind'
-						tick={{ fill: 'white', fontSize: 12 }}
-					/>
-					<Radar dataKey='value' fill='#FF0101' fillOpacity={0.7} />
-				</RadarChart>
-			</ResponsiveContainer>
+			<h3 className='sr-only'>Performance</h3>
+			<article className='w-full h-full'>
+				<ResponsiveContainer width='100%' height='100%'>
+					<RadarChart cx='50%' cy='50%' outerRadius='70%' data={data}>
+						<PolarGrid />
+						<PolarAngleAxis
+							dataKey='kind'
+							tick={{ fill: 'white', fontSize: 12 }}
+						/>
+						<Radar dataKey='value' fill='#FF0101' fillOpacity={0.7} />
+					</RadarChart>
+				</ResponsiveContainer>
+			</article>
 		</section>
 	)
 }
